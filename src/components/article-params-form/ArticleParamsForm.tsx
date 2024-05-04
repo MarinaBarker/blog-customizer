@@ -1,6 +1,14 @@
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
-import { ArticleStateType, backgroundColors, contentWidthArr, defaultArticleState, fontColors, fontFamilyOptions, fontSizeOptions } from 'src/constants/articleProps';
+import {
+	ArticleStateType,
+	backgroundColors,
+	contentWidthArr,
+	defaultArticleState,
+	fontColors,
+	fontFamilyOptions,
+	fontSizeOptions,
+} from 'src/constants/articleProps';
 import { useRef, useState } from 'react';
 import { OnClick } from '../arrow-button/ArrowButton';
 import clsx from 'clsx';
@@ -14,9 +22,12 @@ import { useCloseOutside } from './hooks/useCloseOutside';
 type ArticleParamsFormProps = {
 	formState: ArticleStateType;
 	setFormState(props: ArticleStateType): void;
-}
+};
 
-export const ArticleParamsForm = ({formState, setFormState}: ArticleParamsFormProps) => {
+export const ArticleParamsForm = ({
+	formState,
+	setFormState,
+}: ArticleParamsFormProps) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [fontFamily, setFontFamily] = useState(formState.fontFamilyOption);
 	const [fontColor, setFontColor] = useState(formState.fontColor);
@@ -24,15 +35,16 @@ export const ArticleParamsForm = ({formState, setFormState}: ArticleParamsFormPr
 	const [contentWidth, setContentWidth] = useState(formState.contentWidth);
 	const [fontSize, setFontSize] = useState(formState.fontSizeOption);
 
-	const toggleForm: OnClick = () =>{
+	const toggleForm: OnClick = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	const formRef = useRef<HTMLFormElement>(null);
+	const formRef = useRef<HTMLDivElement>(null);
 	useCloseOutside({
 		isOpen: isMenuOpen,
 		onClose: () => setIsMenuOpen(false),
-		formRef});
+		formRef,
+	});
 
 	const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
@@ -41,7 +53,7 @@ export const ArticleParamsForm = ({formState, setFormState}: ArticleParamsFormPr
 			fontColor: fontColor,
 			backgroundColor: bgColor,
 			contentWidth: contentWidth,
-			fontSizeOption: fontSize
+			fontSizeOption: fontSize,
 		});
 	};
 
@@ -52,16 +64,18 @@ export const ArticleParamsForm = ({formState, setFormState}: ArticleParamsFormPr
 		setBgColor(defaultArticleState.backgroundColor);
 		setContentWidth(defaultArticleState.contentWidth);
 		setFontSize(defaultArticleState.fontSizeOption);
-	}
+	};
 
 	return (
 		<>
+			<div ref={formRef} />
 			<ArrowButton toggleOpen={toggleForm} isOpen={isMenuOpen} />
-			<aside className={clsx(styles.container, isMenuOpen && styles.container_open)}>
-				<form className={styles.form}
+			<aside
+				className={clsx(styles.container, isMenuOpen && styles.container_open)}>
+				<form
+					className={styles.form}
 					onSubmit={handleSubmit}
-					onReset={handleReset}
-					ref={formRef}>
+					onReset={handleReset}>
 					<Text as='h2' size={31} weight={800} uppercase>
 						Задайте параметры
 					</Text>
@@ -76,15 +90,14 @@ export const ArticleParamsForm = ({formState, setFormState}: ArticleParamsFormPr
 						selected={fontSize}
 						options={fontSizeOptions}
 						onChange={setFontSize}
-						name='FontSize'>
-					</RadioGroup>
+						name='FontSize'></RadioGroup>
 					<Select
 						title='Цвет шрифта'
 						selected={fontColor}
 						options={fontColors}
 						onChange={setFontColor}
 					/>
-					<Separator/>
+					<Separator />
 					<Select
 						title='Цвет фона'
 						selected={bgColor}

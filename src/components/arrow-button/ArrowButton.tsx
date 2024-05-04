@@ -7,10 +7,10 @@ export type OnClick = () => void;
 
 type ArrowButtonProps = {
 	toggleOpen: OnClick;
-	isOpen:boolean;
-}
+	isOpen: boolean;
+};
 
-export const ArrowButton = ({toggleOpen, isOpen}: ArrowButtonProps) => {
+export const ArrowButton = ({ toggleOpen, isOpen }: ArrowButtonProps) => {
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
@@ -19,13 +19,17 @@ export const ArrowButton = ({toggleOpen, isOpen}: ArrowButtonProps) => {
 			tabIndex={0}
 			onClick={toggleOpen}
 			className={clsx(styles.container, {
-				[styles.container]:true,
-				[styles.container_open]:isOpen
-				})}>
-			<img src={arrow} alt='иконка стрелочки' className={clsx(styles.arrow, {
-				[styles.arrow]:true,
-				[styles.arrow_open]:isOpen
-				})} />
+				[styles.container]: true,
+				[styles.container_open]: isOpen,
+			})}>
+			<img
+				src={arrow}
+				alt='иконка стрелочки'
+				className={clsx(styles.arrow, {
+					[styles.arrow]: true,
+					[styles.arrow_open]: isOpen,
+				})}
+			/>
 		</div>
 	);
 };
