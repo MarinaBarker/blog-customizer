@@ -40,7 +40,7 @@
 
 .label:hover,
 .item[data-checked='true'] .label:hover {
-	background: var(--gold, #ffc802);
+	background: var(--gold, rgb(255 200 2 / 0.4));
 }
 
 .item[data-checked='true'] .label {
