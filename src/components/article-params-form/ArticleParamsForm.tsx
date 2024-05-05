@@ -67,8 +67,7 @@ export const ArticleParamsForm = ({
 	};
 
 	return (
-		<>
-			<div ref={formRef} />
+		<div ref={formRef}>
 			<ArrowButton toggleOpen={toggleForm} isOpen={isMenuOpen} />
 			<aside
 				className={clsx(styles.container, isMenuOpen && styles.container_open)}>
@@ -116,6 +115,6 @@ export const ArticleParamsForm = ({
 					</div>
 				</form>
 			</aside>
-		</>
+		</div>
 	);
 };
